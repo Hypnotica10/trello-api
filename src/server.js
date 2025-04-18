@@ -1,17 +1,19 @@
+import cors from 'cors';
 import express from 'express';
 import { env } from '~/config/environment';
-import { CONNECT_DB, GET_DB } from '~/config/mongodb';
+import { CONNECT_DB } from '~/config/mongodb';
 import { errorHandlingMiddleware } from '~/middlewares/errorHandler';
-import { APIs_V1 } from '~/routes/v1';
 import { noResourceFound } from '~/middlewares/globalError';
+import { APIs_V1 } from '~/routes/v1';
+import { corsOptions } from './config/cors';
 
 const START_SERVER = () => {
   const app = express()
   const HOST = env.HOST;
   const PORT = env.PORT;
 
-  // Allow CORS: for more info, check here: https://youtu.be/iYgAWJ2Djkw
-  // app.use(cors(corsOptions))
+  // Allow CORS
+  app.use(cors(corsOptions))
 
   // Use Cookie
   // app.use(cookieParser())
